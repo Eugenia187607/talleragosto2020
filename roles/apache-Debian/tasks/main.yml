@@ -1,0 +1,28 @@
+---
+# tasks file for roles/apache-Debian
+- name: Instalación Apache server
+  apt:
+    name: apache2
+    state: latest
+    update_cache: yes
+- name: Creación del VirtualHost
+  file:
+    path: etc/apache2/sites-available
+    state: directory
+    mode: '0755'
+    owner: root
+
+- name: Comenzar y habilitar servicio
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+ 
+- name: Configurar Firewall
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    state: enabled
+  loop:
+    - '80'
+    - '443'

@@ -1,0 +1,9 @@
+---
+# handlers file for roles/apache-RedHat
+
+- name: Reiniciar httpd
+  service:
+    name: httpd
+    state: restarted
+    enabled: yes  
+  

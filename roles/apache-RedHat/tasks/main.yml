@@ -6,23 +6,23 @@
     state: latest
 - name: Creación del VirtualHost
   file:
-    path: /etc/httpd/vhost.d
+    path: /etc/httpd/vhost.d/
     state: directory
     mode: '0755'
     owner: root
 
 - name: Comenzar y habilitar servicio
   service:
-  name: httpd
-  state: started
-  enable: yes
-
-- name: Configurar FIrewall
+    name: httpd
+    state: started
+    enabled: yes
+ 
+- name: Configurar Firewall
   firewalld:
     service: "{{ item }}"
     state: enabled
     permanent: yes
-    inmediate: yes
+    immediate: yes
   loop:
     - http
     - https

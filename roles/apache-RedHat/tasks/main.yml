@@ -1,2 +1,28 @@
 ---
 # tasks file for roles/apache-RedHat
+- name: Instalación Apache server
+  yum:
+    name: httpd
+    state: latest
+- name: Creación del VirtualHost
+  file:
+    path: /etc/httpd/vhost.d
+    state: directory
+    mode: '0755'
+    owner: root
+
+- name: Comenzar y habilitar servicio
+  service:
+  name: httpd
+  state: started
+  enable: yes
+
+- name: Configurar FIrewall
+  firewalld:
+    service: "{{ item }}"
+    state: enabled
+    permanent: yes
+    inmediate: yes
+  loop:
+    - http
+    - https

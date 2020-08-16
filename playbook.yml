@@ -4,8 +4,31 @@
   become: yes
   become_method: sudo
 
+  vars_files:
+  - ./loadbalancer_vars.yml
+
   roles:
   - role: apache-RedHat
     when: ansible_facts['os_family'] == "RedHat"
   - role: apache-Debian
     when: ansible_facts['os_family'] == "Debian"
+
+  tasks:
+  - name: Crear config loadbalancer Centos
+    template:
+      src: templates/loadbalancer.j2
+      dest: /etc/httpd/conf.d/loadbalancer.conf
+      owner: root
+      mode: '0644'
+    when: ansible_facts['os_family'] == "RedHat"
+    notify: Reiniciar httpd
+
+  - name: Crear config loadbalancer Ubuntu
+    template:
+      src: templates/loadbalancer.j2
+      dest: /etc/apache2/sites-enabled/000-default.conf
+      owner: root
+      mode: '0644'
+    when: ansible_facts['os_family'] == "Debian"
+    notify: Reiniciar apache2
+

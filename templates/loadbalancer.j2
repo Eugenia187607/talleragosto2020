@@ -1,0 +1,23 @@
+<VirtualHost *:80>
+        
+<Proxy balancer://{{ nombre_cluster }}>
+            
+	     BalancerMember http://{{ nodoP }}:{{ port1 }}
+	     BalancerMember http://{{ nodoS }}:{{ port2 }}
+
+	     Require all granted
+	
+</Proxy>
+
+	ProxyPreserveHost on
+	ProxyPass /balancer-manager !
+	ProxyPass / balancer://{{ nombre_cluster }}/
+	ProxyPassReverse / balancer://{{ nombre_cluster }}/
+
+	<Location "/balancer-manager">
+		SetHandler balancer-manager
+		require ip {{ red_autorizada }}
+	
+	</Location>
+
+</VirtualHost>

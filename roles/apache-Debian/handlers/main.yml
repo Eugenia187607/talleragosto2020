@@ -1,9 +1,9 @@
 ---
-# handlers file for roles/apache-RedHat
+# handlers file for roles/apache-Debian
 
-- name: Reiniciar httpd
+- name: Reiniciar apache2
   service:
-    name: httpd
+    name: apache2
     state: restarted
     enabled: yes  
   

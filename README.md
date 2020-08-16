@@ -21,8 +21,8 @@ Se debe configurar al menos un servidor en una de las distribuciones implementad
 Se debe configurar archivo inventario_equipos con los hosts deseados. 
 Es deseable copiar la key de el servidor que oficia de bastion a los demas host para la ejecución del playbook.
 
-Role Variables
---------------
+Variables
+---------
 nombre_cluster: 
 nodoP: 
 nodoS: 
@@ -30,8 +30,8 @@ port1:
 port2: 
 red_autorizada: 
 
-Example Playbook
-----------------
+Ejemplos uso playbook
+---------------------
 
 Se detalla un ejemplo de variables y host utilizados en este playbook para ser modifcadas a necesidad del profesional que tome como referencia este playbook.
 
@@ -53,15 +53,17 @@ port1: 80
 port2: 80
 red_autorizada: 192.168.1.0/24
 
-License
--------
+Licencia
+--------
 
 BSD
 
 Información de los autores
 --------------------------
 Ma Eugenia Gardela
+
 Jose Pinto
+
 Rodrigo Barreto
 
 

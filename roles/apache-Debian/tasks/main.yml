@@ -12,6 +12,12 @@
     mode: '0755'
     owner: root
 
+- name: Habilitar mod proxy_balancer
+  apache2_module: name=proxy_balancer state=present
+
+- name: Habilitar mod lbmethod_byrequest
+  apache2_module: name=lbmethod_byrequests state=present
+
 - name: Comenzar y habilitar servicio
   service:
     name: apache2
